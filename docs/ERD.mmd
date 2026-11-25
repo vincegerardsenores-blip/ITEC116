@@ -1,0 +1,49 @@
+erDiagram
+  USERS {
+    int UserID PK
+    varchar FullName
+    varchar Email
+    varchar PasswordHash
+    varchar Role
+    datetime CreatedAt
+    datetime UpdatedAt
+  }
+  MATERIALS {
+    int id PK
+    varchar MaterialName
+    varchar Unit
+    decimal StockQty
+    decimal ReorderLevel
+    datetime createdAt
+    datetime updatedAt
+  }
+  WORK_ORDERS {
+    int id PK
+    varchar WorkOrderCode
+    varchar ProductName
+    int TargetQuantity
+    varchar Status
+    datetime createdAt
+    datetime updatedAt
+  }
+  PRODUCTION_LOGS {
+    int id PK
+    int QuantityProduced
+    int DowntimeMinutes
+    datetime LoggedAt
+    int WorkOrderID FK
+    datetime createdAt
+    datetime updatedAt
+  }
+  MACHINE_DOWNTIMES {
+    int id PK
+    varchar MachineName
+    text Reason
+    datetime StartTime
+    datetime EndTime
+    int WorkOrderID FK
+    datetime createdAt
+    datetime updatedAt
+  }
+  WORK_ORDERS ||--o{ PRODUCTION_LOGS : has
+  WORK_ORDERS ||--o{ MACHINE_DOWNTIMES : has
